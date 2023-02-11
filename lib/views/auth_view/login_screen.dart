@@ -134,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               .makeCentered(),
                         ),
                         24.heightBox,
-                        Row(
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             "Don't have an account?".text

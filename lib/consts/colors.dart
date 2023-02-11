@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-const scaffoldBackgroundColor = Color(0xffF6F8FF);
+const scaffoldBackgroundColor = Color(0xffFFFEFE);
 const textBorderColor = Color(0xffD9D9D9);
-const buttonColor = Color(0xff0038C8);
+const buttonColor = Color(0xffDB015E);
 
 const textDarkGreyColor = Color(0xff4D4D4D);
-const primaryBlueColor = Color(0xffDCE6FF);
+const primaryBlueColor = Color(0xffFFDEEC);
 
 const tertiaryBlueColor = Color(0xffB6CFFF);
 const secondaryPurpleColor = Color(0xffF1F2FF);
@@ -23,5 +23,5 @@ const buttonGreen = Color(0xff00C308);
 
 const purpleGradient = LinearGradient(
     begin: Alignment.topLeft,
-    colors: [Color(0xff43CBFF), Color(0xff9708CC)]
+    colors: [Color(0xffC800C0), Color(0xffDB005C)]
 );
