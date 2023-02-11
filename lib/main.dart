@@ -1,4 +1,8 @@
+import 'package:education_app/views/auth_view/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+
+import 'consts/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +21,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: scaffoldBackgroundColor,
           fontFamily: "Lato"
       ),
-      home: ,
+      home: const LoginScreen(),
     );
   }
 }

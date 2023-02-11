@@ -45,7 +45,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void validateAdmin(context) {
 
-
   }
 
   @override
@@ -68,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   36.heightBox,
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Obx (() => Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -154,7 +153,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),],
-                    ),
                     ),
                   ),
                   Flexible(child: Container()),
