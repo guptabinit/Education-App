@@ -4,3 +4,4 @@ export 'package:get/get.dart';
 export 'package:education_app/common/custom_text_field.dart';
 export 'colors.dart';
 export 'utils.dart';
+export 'package:education_app/common/custom_button.dart';

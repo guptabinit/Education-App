@@ -1,5 +1,7 @@
 import 'package:education_app/consts/consts.dart';
 
+import '../../controller/auth_controller.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -8,6 +10,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  var controller = Get.put(AuthController());
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -41,34 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void validateAdmin(context) {
 
-    FirebaseFirestore.instance
-        .collection(adminCollection)
-        .get()
-        .then((QuerySnapshot snapshot) async {
-      var doc = snapshot.docs[0];
-      if(emailController.text == doc['email'] && passwordController.text == doc['password']){
-        await controller.loginMethod(
-          context: context,
-          email: emailController.text.trim(),
-          password: passwordController.text.trim(),
-        ).then((value){
-          if(value != null){
-            controller.isLoading(false);
-            showSnackBar("Login successful", context);
-            Get.offAll();
-          }else{
-            controller.isLoading(false);
-          }
-        }).onError((error, stackTrace) {
-          controller.isLoading(false);
-          showSnackBar(error.toString(), context);
-        });
-      }
-      else{
-        controller.isLoading(false);
-        showSnackBar("Wrong email or password", context);
-      }
-    });
+
   }
 
   @override
@@ -97,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            color: primaryPurpleColor,
+                            color: primaryBlueColor,
                             borderRadius: BorderRadius.circular(6),
                             boxShadow: const [
                               BoxShadow(
@@ -115,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               value: selected,
                               isDense: true,
                               elevation: 2,
-                              dropdownColor: primaryPurpleColor,
+                              dropdownColor: primaryBlueColor,
                               borderRadius: BorderRadius.circular(6),
                               isExpanded: true,
                               onChanged: (val){
@@ -142,48 +119,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           isPass: true,
                         ),
                         20.heightBox,
-                        controller.isLoading.value ? const Center(child: CircularProgressIndicator(color: buttonColor,),) :
                         MainButton(
                             btnText: "Login",
-                            onTap: () async {
-                              controller.isLoading(true);
-                              if(selectedItem == 1){
-                                validateAdmin(context);
-                              }else{
+                            onTap: () {
 
-                                await controller.loginMethod(
-                                  context: context,
-                                  email: emailController.text.trim(),
-                                  password: passwordController.text.trim(),
-                                ).then((value) async {
-                                  if(value != null){
-                                    await FirebaseFirestore.instance
-                                        .collection(usersCollection)
-                                        .doc(currentUser!.uid)
-                                        .get()
-                                        .then((DocumentSnapshot snap){
-                                      if(snap['isApproved'] == true){
-                                        Get.off(()=> const HomeScreen());
-                                      } else {
-                                        if(snap['kycReqSent'] == true){
-                                          Get.off(()=> const KYCApprovalScreen());
-                                        } else {
-                                          Get.off(()=> const KYCDetailScreen());
-                                        }
-                                      }
-                                    });
-
-                                    controller.isLoading(false);
-                                    showSnackBar("Login successful", context);
-
-                                  } else{
-                                    controller.isLoading(false);
-                                  }
-                                }).onError((error, stackTrace) {
-                                  controller.isLoading(false);
-                                  showSnackBar(error.toString(), context);
-                                });
-                              }
                             }
                         ),
                         36.heightBox,
@@ -205,7 +144,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             4.widthBox,
                             GestureDetector(
                               onTap: (){
-                                Get.to(const SignupScreen());
                               },
                               child: "Sign up"
                                   .text.size(14)
